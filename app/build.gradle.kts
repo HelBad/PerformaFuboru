@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,6 +41,11 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.firebase:firebase-analytics:21.2.0")
+    implementation("com.google.firebase:firebase-database:20.1.0")
+    implementation("com.google.firebase:firebase-storage:20.1.0")
+    implementation("com.firebaseui:firebase-ui-database:2.0.0")
+    implementation("com.google.firebase:firebase-auth:19.4.0")
     implementation("com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

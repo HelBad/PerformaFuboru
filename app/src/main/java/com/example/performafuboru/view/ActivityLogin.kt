@@ -1,90 +1,102 @@
 package com.example.performafuboru.view
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.performafuboru.R
-import com.vishnusivadas.advanced_httpurlconnection.FetchData
+import com.example.performafuboru.model.Pengguna
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONObject
-
 
 class ActivityLogin : AppCompatActivity() {
-    var url = ""
+    lateinit var alertDialog: AlertDialog.Builder
+    lateinit var ref: DatabaseReference
+    lateinit var SP: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        btnLogin.setOnClickListener {
-            Toast.makeText(this@ActivityLogin,
-                "http://dev.fuboru.co.id:8080/bukuharian/login.php" +
-                        "?username=" + userLogin.text.toString() +
-                        "&password=" + passLogin.text.toString() + "&mode=android",
-                Toast.LENGTH_SHORT).show()
+        alertDialog = AlertDialog.Builder(this)
+        ref = FirebaseDatabase.getInstance().getReference("pengguna")
+        SP = getSharedPreferences("Pengguna", Context.MODE_PRIVATE)
 
-//            getView()
-            val intent = Intent(this@ActivityLogin, ActivityBeranda::class.java)
-            intent.putExtra("http://dev.fuboru.co.id:8080/bukuharian/login.php" +
-                    "?username=" + userLogin.text.toString() +
-                    "&password=" + passLogin.text.toString() + "&mode=android", url)
-            startActivity(intent)
+        btnLogin.setOnClickListener {
+            Toast.makeText(this@ActivityLogin, "Mohon Tunggu...", Toast.LENGTH_SHORT).show()
+            if(validate()) {
+                login()
+            }
+        }
+        daftarLogin.setOnClickListener {
+            startActivity(Intent(this@ActivityLogin, ActivityRegister::class.java))
+            finish()
+        }
+        lupaLogin.setOnClickListener {
+            startActivity(Intent(this@ActivityLogin, ActivityPassword::class.java))
             finish()
         }
     }
 
-    private fun getView() {
-//        btnLogin.setOnClickListener {
-//            val username = userLogin.text.toString()
-//            val password = passLogin.text.toString()
-//            if (username != "" && password != "") {
-//                val handler = Handler(Looper.getMainLooper())
-//                handler.post {
-//                    val field = arrayOfNulls<String>(2)
-//                    field[0] = "username"
-//                    field[1] = "password"
-//                    val data = arrayOfNulls<String>(2)
-//                    data[0] = username
-//                    data[1] = password
-//                    val putData = PutData("http://dev.fuboru.co.id:8080/bukuharian/login.php", "POST", field, data)
-//
-//                    if (putData.startPut()) {
-//                        if (putData.onComplete()) {
-//                            var result: JSONObject?
-//                            try {
-//                                result = JSONObject(putData.result)
-//                                if (result.getString("status") == "true") {
-//                                    Toast.makeText(applicationContext, result.getString("message"), Toast.LENGTH_SHORT).show()
-//                                    val intent = Intent(this@ActivityLogin, ActivityBeranda::class.java)
-//                                    startActivity(intent)
-//                                    finish()
-//                                } else {
-//                                    Toast.makeText(applicationContext, result.getString("message"), Toast.LENGTH_SHORT).show()
-//                                }
-//                            } catch (e: JSONException) {
-//                                e.printStackTrace()
-//                            }
-//                        }
-//                    }
-//                }
-//            } else {
-//                Toast.makeText(applicationContext, "All file required", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-
-        val fetchData = FetchData("http://dev.fuboru.co.id:8080/bukuharian/login.php" +
-                "?username=" + userLogin.text.toString() +
-                "&password=" + passLogin.text.toString() + "&mode=android")
-        if (fetchData.startFetch()) {
-            if (fetchData.onComplete()) {
-                val result: String = fetchData.result
-                try {
-                    val data = JSONObject(result)
-                    val dataObject = data.getJSONObject("data")
-
-                } catch (t: Throwable) { }
-            }
+    private fun validate(): Boolean {
+        if(userLogin.text.toString() == "") {
+            Toast.makeText(this, "Username kosong", Toast.LENGTH_SHORT).show()
+            return false
         }
+        if(passLogin.text.toString() == "") {
+            Toast.makeText(this, "Password kosong", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
+    private fun login() {
+        ref.orderByChild("username").equalTo(userLogin.text.toString())
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.exists()) {
+                        for (h in p0.children) {
+                            val us = h.getValue(Pengguna::class.java)
+                            if(us!!.password == passLogin.text.toString()) {
+                                val editor = SP.edit()
+                                editor.putString("username", us.username)
+                                editor.putString("password", us.password)
+                                editor.apply()
+
+                                startActivity(Intent(this@ActivityLogin, ActivityBeranda::class.java))
+                                finish()
+                            } else {
+                                Toast.makeText(this@ActivityLogin, "Password salah", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } else {
+                        Toast.makeText(this@ActivityLogin, "Username belum terdaftar", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+    }
+
+    override fun onBackPressed() {
+        alertDialog.setTitle("Keluar Aplikasi")
+        alertDialog.setMessage("Apakah anda ingin keluar aplikasi ?").setCancelable(false)
+            .setPositiveButton("YA", object: DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface, id:Int) {
+                    finishAffinity()
+                }
+            })
+            .setNegativeButton("TIDAK", object: DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface, id:Int) {
+                    dialog.cancel()
+                }
+            }).create().show()
     }
 }
