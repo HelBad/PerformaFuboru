@@ -2,7 +2,8 @@ package com.example.performafuboru.api
 
 class ApiStaff {
     companion object {
-        private val SERVER = "http://10.0.2.2/fuboru_performa/staff/"
+        private val SERVER = "http://tcrcorp.id/fuboru_performa/staff/"
+//        private val SERVER = "http://10.0.2.2/fuboru_performa/staff/"
         val IZIN = SERVER + "izin.php"
         val IZIN_ADD = SERVER + "izin_add.php"
         val IZIN_CLOCKIN = SERVER + "izin_clockin.php"
