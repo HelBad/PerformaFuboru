@@ -77,7 +77,7 @@ class ActivityRegister : AppCompatActivity() {
 
     private fun register() {
         Toast.makeText(this, "Mohon Tunggu...", Toast.LENGTH_SHORT).show()
-        val dataUser = Pengguna(userRegister.text.toString(), passRegister.text.toString())
+        val dataUser = Pengguna(userRegister.text.toString(), passRegister.text.toString(), "STAFF")
         ref.child(userRegister.text.toString()).setValue(dataUser).addOnCompleteListener {
             startActivity(Intent(this@ActivityRegister, ActivityLogin::class.java))
             finish()

@@ -1,25 +1,22 @@
-package com.example.performafuboru.view.bukuharian
+package com.example.performafuboru.view.admin.bukuharian
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.performafuboru.R
-import com.example.performafuboru.view.ActivityBeranda
-import kotlinx.android.synthetic.main.activity_bukuharian.*
+import com.example.performafuboru.view.admin.ActivityBeranda
+import kotlinx.android.synthetic.main.admin_activity_bukuharian.*
 
 class ActivityBukuharian : AppCompatActivity() {
-    lateinit var alertDialog: AlertDialog.Builder
     lateinit var SP: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bukuharian)
+        setContentView(R.layout.admin_activity_bukuharian)
 
-        alertDialog = AlertDialog.Builder(this)
         SP = getSharedPreferences("Pengguna", Context.MODE_PRIVATE)
 
         toolbarHarian.text = intent.getStringExtra("title").toString()

@@ -25,11 +25,20 @@ class ActivityLoading : AppCompatActivity() {
             override fun run() {
                 try {
                     sleep(2500)
-                    if(SP.getString("username", "") == "") {
+                    if(SP.getString("level", "") == "") {
                         startActivity(Intent(this@ActivityLoading, ActivityLogin::class.java))
                         finish()
+                    } else if(SP.getString("level", "") == "HRGA") {
+                        startActivity(Intent(this@ActivityLoading,
+                            com.example.performafuboru.view.admin.ActivityBeranda::class.java))
+                        finish()
+                    } else if(SP.getString("level", "") == "SECURITY") {
+                        startActivity(Intent(this@ActivityLoading,
+                            com.example.performafuboru.view.security.ActivityBeranda::class.java))
+                        finish()
                     } else {
-                        startActivity(Intent(this@ActivityLoading, ActivityBeranda::class.java))
+                        startActivity(Intent(this@ActivityLoading,
+                            com.example.performafuboru.view.staff.ActivityBeranda::class.java))
                         finish()
                     }
                 } catch (e: Exception){

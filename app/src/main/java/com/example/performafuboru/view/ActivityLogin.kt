@@ -70,10 +70,22 @@ class ActivityLogin : AppCompatActivity() {
                                 val editor = SP.edit()
                                 editor.putString("username", us.username)
                                 editor.putString("password", us.password)
+                                editor.putString("level", us.level)
                                 editor.apply()
 
-                                startActivity(Intent(this@ActivityLogin, ActivityBeranda::class.java))
-                                finish()
+                                if(SP.getString("level", "") == "HRGA") {
+                                    startActivity(Intent(this@ActivityLogin,
+                                        com.example.performafuboru.view.admin.ActivityBeranda::class.java))
+                                    finish()
+                                } else if(SP.getString("level", "") == "SECURITY") {
+                                    startActivity(Intent(this@ActivityLogin,
+                                        com.example.performafuboru.view.security.ActivityBeranda::class.java))
+                                    finish()
+                                } else {
+                                    startActivity(Intent(this@ActivityLogin,
+                                        com.example.performafuboru.view.staff.ActivityBeranda::class.java))
+                                    finish()
+                                }
                             } else {
                                 Toast.makeText(this@ActivityLogin, "Password salah", Toast.LENGTH_SHORT).show()
                             }
