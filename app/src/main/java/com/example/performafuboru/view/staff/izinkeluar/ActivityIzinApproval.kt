@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.performafuboru.R
 import com.example.performafuboru.api.ApiStaff
-import com.example.performafuboru.view.admin.izinkeluar.ActivityIzin
 import com.vishnusivadas.advanced_httpurlconnection.FetchData
-import kotlinx.android.synthetic.main.admin_activity_izin_approval.backDetail
 import kotlinx.android.synthetic.main.staff_activity_izin_approval.*
 import org.json.JSONObject
 

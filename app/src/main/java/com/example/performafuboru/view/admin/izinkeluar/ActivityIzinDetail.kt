@@ -8,7 +8,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.example.performafuboru.R
 import com.example.performafuboru.api.ApiAdmin
-import com.example.performafuboru.view.admin.izinkeluar.ActivityIzin
 import com.vishnusivadas.advanced_httpurlconnection.FetchData
 import kotlinx.android.synthetic.main.admin_activity_izin_detail.*
 import org.json.JSONObject

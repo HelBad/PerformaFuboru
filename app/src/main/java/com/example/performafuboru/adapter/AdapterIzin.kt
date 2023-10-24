@@ -88,25 +88,6 @@ class AdapterIzin(dataList: ArrayList<Izin>?): RecyclerView.Adapter<AdapterIzin.
                     (v.context as AppCompatActivity).finish()
                 }
             }
-
-//            if(dataList[position].status == "T1" || dataList[position].status == "T2") {
-//                val intent = Intent(v.context, ActivityIzinApproval::class.java)
-////                intent.putExtra("kode", dataList[position].kode)
-////                intent.putExtra("approval", dataList[position].approval)
-//                v.context.startActivity(intent)
-//                (v.context as AppCompatActivity).finish()
-//            } else if(dataList[position].status == "A") {
-//                val intent = Intent(v.context, ActivityIzinAbsensi::class.java)
-//                intent.putExtra("kode", dataList[position].kode_izin)
-//                v.context.startActivity(intent)
-//                (v.context as AppCompatActivity).finish()
-//            } else {
-//                val intent = Intent(v.context, ActivityIzinDetail::class.java)
-////                intent.putExtra("kode", dataList[position].kode)
-////                intent.putExtra("approval", dataList[position].approval)
-//                v.context.startActivity(intent)
-//                (v.context as AppCompatActivity).finish()
-//            }
         }
     }
 

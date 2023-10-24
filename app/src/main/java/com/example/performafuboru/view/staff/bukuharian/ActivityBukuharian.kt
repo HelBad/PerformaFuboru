@@ -8,9 +8,7 @@ import android.os.Bundle
 import android.webkit.WebViewClient
 import com.example.performafuboru.R
 import com.example.performafuboru.view.staff.ActivityBeranda
-import kotlinx.android.synthetic.main.staff_activity_bukuharian.backHarian
-import kotlinx.android.synthetic.main.staff_activity_bukuharian.toolbarHarian
-import kotlinx.android.synthetic.main.staff_activity_bukuharian.webHarian
+import kotlinx.android.synthetic.main.staff_activity_bukuharian.*
 
 class ActivityBukuharian : AppCompatActivity() {
     lateinit var SP: SharedPreferences

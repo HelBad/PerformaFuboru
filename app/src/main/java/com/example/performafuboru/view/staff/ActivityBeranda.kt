@@ -17,11 +17,7 @@ import com.example.performafuboru.view.ActivityLogin
 import com.example.performafuboru.view.staff.bukuharian.ActivityBukuharian
 import com.example.performafuboru.view.staff.izinkeluar.ActivityIzin
 import com.vishnusivadas.advanced_httpurlconnection.FetchData
-import kotlinx.android.synthetic.main.staff_activity_beranda.harianBeranda
-import kotlinx.android.synthetic.main.staff_activity_beranda.idBeranda
-import kotlinx.android.synthetic.main.staff_activity_beranda.izinBeranda
-import kotlinx.android.synthetic.main.staff_activity_beranda.logoutBeranda
-import kotlinx.android.synthetic.main.staff_activity_beranda.namaBeranda
+import kotlinx.android.synthetic.main.staff_activity_beranda.*
 import org.json.JSONObject
 
 class ActivityBeranda : AppCompatActivity() {

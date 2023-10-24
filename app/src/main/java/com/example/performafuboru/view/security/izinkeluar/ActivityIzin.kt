@@ -15,14 +15,7 @@ import com.example.performafuboru.api.ApiSecurity
 import com.example.performafuboru.model.Izin
 import com.example.performafuboru.view.security.ActivityBeranda
 import com.vishnusivadas.advanced_httpurlconnection.FetchData
-import kotlinx.android.synthetic.main.security_activity_izin.backIzin1
-import kotlinx.android.synthetic.main.security_activity_izin.backIzin2
-import kotlinx.android.synthetic.main.security_activity_izin.batalIzin
-import kotlinx.android.synthetic.main.security_activity_izin.lanjutIzin
-import kotlinx.android.synthetic.main.security_activity_izin.namaIzin
-import kotlinx.android.synthetic.main.security_activity_izin.recyclerIzin
-import kotlinx.android.synthetic.main.security_activity_izin.toolbarIzin1
-import kotlinx.android.synthetic.main.security_activity_izin.toolbarIzin2
+import kotlinx.android.synthetic.main.security_activity_izin.*
 import org.json.JSONObject
 
 class ActivityIzin : AppCompatActivity() {
