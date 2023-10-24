@@ -29,12 +29,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
-            android:name=".view.security.izinkeluar.ActivityIzinApproval"
-            android:exported="false" />
-        <activity
-            android:name=".view.security.izinkeluar.ActivityIzinDetail"
-            android:exported="false" />
-        <activity
             android:name=".view.staff.izinkeluar.ActivityIzinApproval"
             android:exported="false" />
         <activity
@@ -56,6 +50,12 @@
             android:name=".view.staff.ActivityBeranda"
             android:exported="false" />
         <activity
+            android:name=".view.security.izinkeluar.ActivityIzinApproval"
+            android:exported="false" />
+        <activity
+            android:name=".view.security.izinkeluar.ActivityIzinDetail"
+            android:exported="false" />
+        <activity
             android:name=".view.security.izinkeluar.ActivityIzin"
             android:exported="false" />
         <activity
@@ -69,12 +69,6 @@
             android:exported="false" />
         <activity
             android:name=".view.admin.izinkeluar.ActivityIzinDetail"
-            android:exported="false" />
-        <activity
-            android:name=".view.admin.izinkeluar.ActivityIzinAbsensi"
-            android:exported="false" />
-        <activity
-            android:name=".view.admin.izinkeluar.ActivityIzinAdd"
             android:exported="false" />
         <activity
             android:name=".view.admin.izinkeluar.ActivityIzin"
