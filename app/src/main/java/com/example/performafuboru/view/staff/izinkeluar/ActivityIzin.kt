@@ -58,6 +58,8 @@ class ActivityIzin : AppCompatActivity() {
                             dataArray.getJSONObject(i).getString("nama"),
                             dataArray.getJSONObject(i).getString("waktu_izin"),
                             dataArray.getJSONObject(i).getString("waktu_kembali"),
+                            dataArray.getJSONObject(i).getString("kembali"),
+                            dataArray.getJSONObject(i).getString("flag"),
                             dataArray.getJSONObject(i).getString("status")
                         )
                         dataArrayList.add(newdata)

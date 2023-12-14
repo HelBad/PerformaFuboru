@@ -59,7 +59,7 @@ class ActivityIzinAbsensi : AppCompatActivity() {
 
         alertDialog = AlertDialog.Builder(this)
         SP = getSharedPreferences("Pengguna", Context.MODE_PRIVATE)
-        kode = arrayListOf("", "", "")
+        kode = arrayListOf("", "", "", "")
         getLoc()
         getData()
 
@@ -144,8 +144,7 @@ class ActivityIzinAbsensi : AppCompatActivity() {
     }
 
     private fun getData() {
-        val fetchData1 = FetchData(
-            ApiStaff.PENGGUNA +
+        val fetchData1 = FetchData(ApiStaff.PENGGUNA +
                 "?kode=" + SP.getString("username", "").toString())
         if (fetchData1.startFetch()) {
             if (fetchData1.onComplete()) {
@@ -181,6 +180,15 @@ class ActivityIzinAbsensi : AppCompatActivity() {
         if (requestCode == 111 && resultCode == RESULT_OK) {
             bitmap = data!!.extras!!["data"] as Bitmap
             encodebitmap(bitmap)
+            if(intent.getStringExtra("kembali").toString() == "0") {
+                kode[3] = "C"
+            } else {
+                if(intent.getStringExtra("flag").toString() == "H") {
+                    kode[3] = "T3"
+                } else {
+                    kode[3] = "C"
+                }
+            }
             uploadFoto()
 
             startActivity(Intent(this@ActivityIzinAbsensi, ActivityIzin::class.java))
@@ -208,7 +216,7 @@ class ActivityIzinAbsensi : AppCompatActivity() {
                 map["gps_out"] = kode[0] + "," + kode[1]
                 map["catatan"] = ketAbsensi.text.toString()
                 map["foto"] = encodedimage
-                map["status"] = "T3"
+                map["status"] = kode[3]
                 return map
             }
         }

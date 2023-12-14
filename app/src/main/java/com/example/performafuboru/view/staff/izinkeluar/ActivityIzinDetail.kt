@@ -32,8 +32,7 @@ class ActivityIzinDetail : AppCompatActivity() {
     }
 
     private fun getData() {
-        val fetchData = FetchData(
-            ApiStaff.IZIN_DETAIL +
+        val fetchData = FetchData(ApiStaff.IZIN_DETAIL +
                 "?kode_izin=" + intent.getStringExtra("kode").toString())
         if (fetchData.startFetch()) {
             if (fetchData.onComplete()) {
@@ -48,8 +47,13 @@ class ActivityIzinDetail : AppCompatActivity() {
                     locoutDetail.text = "(" + dataObject.getString("gps_out") + ")"
                     kodeDetail.text = dataObject.getString("create_by")
                     namaDetail.text = dataObject.getString("nama")
-                    keperluanDetail.text = dataObject.getString("keperluan") + " - " + dataObject.getString("keterangan")
-                    ketDetail.text = dataObject.getString("catatan")
+                    if(dataObject.getString("kembali") == "0") {
+                        keperluanDetail.text = dataObject.getString("keperluan") + " - TIDAK KEMBALI"
+                    } else {
+                        keperluanDetail.text = dataObject.getString("keperluan") + " - KEMBALI"
+                    }
+                    ketDetail.text = dataObject.getString("keterangan")
+                    catatanDetail.text = dataObject.getString("catatan")
                     when (dataObject.getString("status")) {
                         "A" -> { statusDetail.text = "STATUS : DISETUJUI" }
                         "C" -> { statusDetail.text = "STATUS : SELESAI" }

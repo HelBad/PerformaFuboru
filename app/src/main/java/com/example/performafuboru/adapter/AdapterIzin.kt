@@ -78,6 +78,8 @@ class AdapterIzin(dataList: ArrayList<Izin>?): RecyclerView.Adapter<AdapterIzin.
                     val intent = Intent(v.context,
                         com.example.performafuboru.view.staff.izinkeluar.ActivityIzinAbsensi::class.java)
                     intent.putExtra("kode", dataList[position].kode_izin)
+                    intent.putExtra("kembali", dataList[position].kembali)
+                    intent.putExtra("flag", dataList[position].flag)
                     v.context.startActivity(intent)
                     (v.context as AppCompatActivity).finish()
                 } else {

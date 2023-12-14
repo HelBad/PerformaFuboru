@@ -36,7 +36,11 @@ class ActivityIzinApproval : AppCompatActivity() {
                     clockoutDetail.text = dataObject.getString("waktu_kembali")
                     kodeDetail.text = dataObject.getString("create_by")
                     namaDetail.text = dataObject.getString("nama")
-                    keperluanDetail.text = dataObject.getString("keperluan")
+                    if(dataObject.getString("kembali") == "0") {
+                        keperluanDetail.text = dataObject.getString("keperluan") + " - TIDAK KEMBALI"
+                    } else {
+                        keperluanDetail.text = dataObject.getString("keperluan") + " - KEMBALI"
+                    }
                     ketDetail.text = dataObject.getString("keterangan")
                     when (dataObject.getString("status")) {
                         "A" -> { statusDetail.text = "STATUS : DISETUJUI" }

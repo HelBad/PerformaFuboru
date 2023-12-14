@@ -5,5 +5,7 @@ data class Izin(
     val nama: String?,
     val waktu_izin: String?,
     val waktu_kembali: String?,
+    val kembali: String?,
+    val flag: String?,
     val status: String?
 )

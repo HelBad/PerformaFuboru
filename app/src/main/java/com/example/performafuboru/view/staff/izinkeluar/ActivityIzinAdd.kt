@@ -41,7 +41,7 @@ class ActivityIzinAdd : AppCompatActivity() {
 
         alertDialog = AlertDialog.Builder(this)
         SP = getSharedPreferences("Pengguna", Context.MODE_PRIVATE)
-        izin = arrayListOf("", "", "", "", "", "", "", "", "")
+        izin = arrayListOf("", "", "", "", "", "", "", "", "", "")
         getData()
         setData()
 
@@ -74,7 +74,7 @@ class ActivityIzinAdd : AppCompatActivity() {
                 try {
                     val data = JSONObject(result)
                     val dataObject = data.getJSONObject("data")
-                    izin[7] = String.format("%03d", dataObject.getString("COUNT(*)").toInt() + 1)
+                    izin[8] = String.format("%03d", dataObject.getString("COUNT(*)").toInt() + 1)
                 } catch (t: Throwable) { }
             }
         }
@@ -93,8 +93,8 @@ class ActivityIzinAdd : AppCompatActivity() {
             }
         }
 
-        izin[8] = SP.getString("username", "").toString() + "/IKK/" +
-                formatY.format(Date()).toString() + "/" + izin[7]
+        izin[9] = SP.getString("username", "").toString() + "/IKK/" +
+                formatY.format(Date()).toString() + "/" + izin[8]
     }
 
     private fun setWaktu() {
@@ -163,14 +163,26 @@ class ActivityIzinAdd : AppCompatActivity() {
             pribadiAdd.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorAccent))
             izin[6] = "PRIBADI"
         }
+
+        kembaliAdd.setOnClickListener {
+            kembaliAdd.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorAccent))
+            tidakAdd.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorPrimary))
+            izin[7] = "1"
+        }
+        tidakAdd.setOnClickListener {
+            kembaliAdd.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorPrimary))
+            tidakAdd.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorAccent))
+            izin[7] = "0"
+        }
     }
 
     private fun simpanIzin() {
         AndroidNetworking.post(ApiStaff.IZIN_ADD)
-            .addBodyParameter("kode_izin", izin[8])
+            .addBodyParameter("kode_izin", izin[9])
             .addBodyParameter("waktu_izin", waktuAdd.text.toString())
             .addBodyParameter("waktu_kembali", batasAdd.text.toString())
             .addBodyParameter("keperluan", izin[6])
+            .addBodyParameter("kembali", izin[7])
             .addBodyParameter("keterangan", alasanAdd.text.toString())
             .addBodyParameter("create_by", SP.getString("username", "").toString())
             .addBodyParameter("create_date", formatDate1.format(Date()).toString())
